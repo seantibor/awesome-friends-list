@@ -3,6 +3,7 @@ Welcome to the ALAF program. An awesome program for awesome friends.
 '''
 import json
 from tabulate import tabulate
+import textwrap
 
 friends_file = "alaf.json"
 
@@ -35,14 +36,18 @@ def instructions():
     print("<INSTRUCTIONS GO HERE> (Remember to make them awesome)")
 
 def menu():
-    menu_text='''==== Main Menu ====
-(L)ist Friends
-(A)dd Friend
-(C)lear List
-(Q)uit
+    menu_text=textwrap.dedent('''\
 
-Your choice? 
-'''
+                            ==============================
+                            ==== AWESOME FRIENDS LIST ====
+                            ====       Main Menu      ====
+                            ==============================
+                            (L)ist Friends
+                            (A)dd Friend
+                            (C)lear List
+                            (Q)uit
+
+                            Your choice? ''')
     choice = ''
     options = set('lacq')
     while True:
@@ -52,6 +57,9 @@ Your choice?
         print("I didn't understand. Please try again.\n")
 
 def list_friends(friends):
+    if not friends:
+        print("No friends in list. Add some!")
+        return
     # use tabulate later, just print for now
     print(tabulate(friends, headers='keys', tablefmt='fancy_grid'))
 
