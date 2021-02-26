@@ -27,7 +27,17 @@ def instructions():
     print("<INSTRUCTIONS GO HERE> (Remember to make them awesome)")
 
 def menu():
-    pass
+    """ Show the user a menu of things they can do, and return their choice """
+    print("Choose an option")
+    print("(L)ist Friends")
+    print("(A)dd Friend")
+    print("(C)lear List")
+    print("(Q)uit")
+    while True:
+        choice = input("Now choose: ").lower().strip()
+        if choice in 'lacq':
+            return choice
+        print("Invalid choice.")
 
 def list_friends(friends):
     # use tabulate later, just print for now
@@ -48,9 +58,20 @@ def main():
     welcome()
     instructions()
     friends = load_friends()
-    new_friend = add_friend()
-    friends.append(new_friend)
-    list_friends(friends)
+    action = menu()
+    # List Friends
+    if action == 'l':
+        list_friends(friends)
+    # Add Friend
+    elif action == 'a':
+        new_friend = add_friend()
+        friends.append(new_friend)
+        print(f"{new_friend['Name']} added.")
+    elif action == 'c':
+        friends = []
+        print("List cleared.")
+    
+    
     save_friends(friends)
 
 ''' The better way, but optional
